@@ -1,3 +1,5 @@
+import "./app.css";
+
 const App = () => {
   const course = {
     name: "Half Stack application development",
