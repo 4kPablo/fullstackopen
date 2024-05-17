@@ -35,20 +35,7 @@ const App = () => {
 
       <h2>statistics</h2>
       {hasFeedback ? (
-        <div>
-          <Statistics text="good" value={good} />
-          <Statistics text="neutral" value={neutral} />
-          <Statistics text="bad" value={bad} />
-          <Statistics text="all" value={good + neutral + bad} />
-          <Statistics
-            text="average"
-            value={(good - bad) / (good + neutral + bad)}
-          />
-          <Statistics
-            text="positive"
-            value={(good / (good + neutral + bad)) * 100 + " %"}
-          />
-        </div>
+        <Statistics good={good} neutral={neutral} bad={bad} />
       ) : (
         <div>No feedback given</div>
       )}
@@ -60,7 +47,26 @@ const Button = ({ text, clickHandler }) => {
   return <button onClick={clickHandler}>{text}</button>;
 };
 
-const Statistics = ({ text, value }) => {
+const Statistics = ({ good, neutral, bad }) => {
+  return (
+    <>
+      <StatisticLine text="good" value={good} />
+      <StatisticLine text="neutral" value={neutral} />
+      <StatisticLine text="bad" value={bad} />
+      <StatisticLine text="all" value={good + neutral + bad} />
+      <StatisticLine
+        text="average"
+        value={(good - bad) / (good + neutral + bad)}
+      />
+      <StatisticLine
+        text="positive"
+        value={(good / (good + neutral + bad)) * 100 + " %"}
+      />
+    </>
+  );
+};
+
+const StatisticLine = ({ text, value }) => {
   return (
     <div>
       {text} {value}
