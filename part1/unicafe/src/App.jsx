@@ -30,15 +30,19 @@ const App = () => {
       <Button text="good" clickHandler={() => clickHandler("good")} />
       <Button text="neutral" clickHandler={() => clickHandler("neutral")} />
       <Button text="bad" clickHandler={() => clickHandler("bad")} />
+
       <h2>statistics</h2>
-      <Stat text="good" number={good} />
-      <Stat text="neutral" number={neutral} />
-      <Stat text="bad" number={bad} />
-      <Stat text="all" number={good + neutral + bad} />
-      <Stat text="average" number={(good - bad) / (good + neutral + bad)} />
-      <Stat
+      <Statistics text="good" value={good} />
+      <Statistics text="neutral" value={neutral} />
+      <Statistics text="bad" value={bad} />
+      <Statistics text="all" value={good + neutral + bad} />
+      <Statistics
+        text="average"
+        value={(good - bad) / (good + neutral + bad)}
+      />
+      <Statistics
         text="positive"
-        number={(good / (good + neutral + bad)) * 100 + " %"}
+        value={(good / (good + neutral + bad)) * 100 + " %"}
       />
     </>
   );
@@ -48,10 +52,10 @@ const Button = ({ text, clickHandler }) => {
   return <button onClick={clickHandler}>{text}</button>;
 };
 
-const Stat = ({ text, number }) => {
+const Statistics = ({ text, value }) => {
   return (
     <div>
-      {text} {number}
+      {text} {value}
     </div>
   );
 };
