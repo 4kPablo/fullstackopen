@@ -2,7 +2,8 @@ import { useState } from "react";
 import "./app.css";
 
 const App = () => {
-  const [selected, setSelected] = useState(getRandomInt(7));
+  const [selected, setSelected] = useState(getRandomInt(8));
+  const [points, setPoints] = useState(new Array(8).fill(0));
 
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -15,12 +16,26 @@ const App = () => {
     "The only way to go fast, is to go well.",
   ];
 
+  const voteHandler = () => {
+    const copyPoints = [...points];
+    copyPoints[selected] += 1;
+    setPoints(copyPoints);
+  };
+
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <div>has {points[selected]} votes</div>
       <button
         onClick={() => {
-          setSelected(getRandomInt(7));
+          voteHandler();
+        }}
+      >
+        vote
+      </button>
+      <button
+        onClick={() => {
+          setSelected(getRandomInt(8));
         }}
       >
         next anecdote
