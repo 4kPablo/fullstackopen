@@ -1,4 +1,4 @@
-import "./app.css";
+import "./styles.css";
 
 const App = () => {
   const course = {

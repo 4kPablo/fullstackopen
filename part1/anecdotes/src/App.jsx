@@ -1,9 +1,9 @@
 import { useState } from "react";
-import "./app.css";
+import "./styles.css";
 
 const App = () => {
-  const [selected, setSelected] = useState(getRandomInt(8));
   const [points, setPoints] = useState(new Array(8).fill(0));
+  const [selected, setSelected] = useState(getRandomInt(8));
   const [mostVoted, setMostVoted] = useState(null);
 
   const anecdotes = [
@@ -18,10 +18,10 @@ const App = () => {
   ];
 
   const voteHandler = () => {
-    const copyPoints = [...points];
-    copyPoints[selected] += 1;
-    setPoints(copyPoints);
-    selectMostVoted(copyPoints);
+    const updatedPoints = [...points];
+    updatedPoints[selected] += 1;
+    setPoints(updatedPoints);
+    selectMostVoted(updatedPoints);
   };
 
   const selectMostVoted = (points) => {
