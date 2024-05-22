@@ -4,6 +4,7 @@ import "./app.css";
 const App = () => {
   const [selected, setSelected] = useState(getRandomInt(8));
   const [points, setPoints] = useState(new Array(8).fill(0));
+  const [mostVoted, setMostVoted] = useState(null);
 
   const anecdotes = [
     "If it hurts, do it more often.",
@@ -20,10 +21,26 @@ const App = () => {
     const copyPoints = [...points];
     copyPoints[selected] += 1;
     setPoints(copyPoints);
+    selectMostVoted(copyPoints);
+  };
+
+  const selectMostVoted = (points) => {
+    let mostVotedIndex = null;
+    let highestVotes = 0;
+
+    points.forEach((votes, i) => {
+      if (votes > highestVotes) {
+        highestVotes = votes;
+        mostVotedIndex = i;
+      }
+    });
+
+    setMostVoted(anecdotes[mostVotedIndex]);
   };
 
   return (
     <>
+      <h2>Anecdote of the day</h2>
       <div>{anecdotes[selected]}</div>
       <div>has {points[selected]} votes</div>
       <button
@@ -40,6 +57,9 @@ const App = () => {
       >
         next anecdote
       </button>
+
+      <h2>Anecdote with most votes</h2>
+      <div>{mostVoted}</div>
     </>
   );
 };
